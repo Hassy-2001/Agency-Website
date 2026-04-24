@@ -118,7 +118,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://x.com/"
+                href="https://x.com/GeekVentures26"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white/75 transition hover:bg-white/10 hover:border-white/25"
