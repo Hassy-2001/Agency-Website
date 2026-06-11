@@ -29,10 +29,10 @@ export const services = [
       'Fast, conversion-focused websites with premium motion design, clean UX, and high-performance engineering.'
   },
   {
-    title: 'Product Strategy & Scaling',
-    description:
-      'From architecture to growth systems, we help companies launch faster and scale with confidence.'
-  }
+    title: 'Digital Marketing',
+    description: 'Data-driven campaigns, SEO, and brand growth solutions.'
+  },
+
 ];
 
 export const processSteps = [

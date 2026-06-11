@@ -20,10 +20,7 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 58% 42%, rgba(127, 217, 255, 0.24), transparent 14%),
-    radial-gradient(circle at 69% 45%, rgba(157, 107, 255, 0.18), transparent 16%),
-    #09090b;
+  background: #030712;
   color: #f5f7fb;
 }
 
@@ -35,9 +32,9 @@ body::before {
   background-image:
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-size: 42px 42px;
   mask-image: radial-gradient(circle at center, black 30%, transparent 84%);
-  opacity: 0.28;
+  opacity: 0.16;
 }
 
 .section-shell {

@@ -1,113 +1,81 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import SectionReveal from "./SectionReveal";
+import { useRef } from "react";
+import { Quote } from "lucide-react";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 const testimonials = [
   {
-    name: "Hassan Ghani",
+    name: "Kaleem Khan",
     role: "Founder, StartupX",
     image: "/images/testimonials/client1.avif",
     text: "GeekVentures helped us automate our operations and build scalable systems.",
   },
   {
-    name: "Ali Khan",
+    name: "Sarah Ahmed",
     role: "CTO, TechFlow",
     image: "/images/testimonials/client2.webp",
     text: "High-performance platform delivered with excellent quality.",
   },
   {
-    name: "Sarah Ahmed",
+    name: "Ali Khan",
     role: "Product Manager",
     image: "/images/testimonials/client3.jpg",
     text: "Professional, fast, and very skilled team.",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 28,
-    filter: "blur(10px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.65,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
 export default function Testimonials() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useGsapReveal(sectionRef, { stagger: 0.08 });
+
   return (
-    <SectionReveal>
-      <section id="testimonials" className="px-6 py-24 md:px-10 lg:px-16">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-12 max-w-2xl"
-          >
-            <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-white/65">
-              Testimonials
-            </div>
+    <section ref={sectionRef} id="testimonials" className="px-6 py-24 md:px-10 lg:px-16">
+      <div className="mx-auto max-w-7xl">
+        <div data-reveal className="mb-12 max-w-2xl">
+          <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-white/65">
+            Testimonials
+          </div>
 
-            <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
-              Trusted by clients who value quality.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            className="grid gap-6 lg:grid-cols-3"
-          >
-            {testimonials.map((item) => (
-              <motion.div
-                key={item.name}
-                variants={itemVariants}
-                whileHover={{ y: -8, scale: 1.01 }}
-                transition={{ duration: 0.25 }}
-                className="group rounded-[28px] border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl"
-              >
-                <div className="mb-5 flex items-center gap-4">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={56}
-                    height={56}
-                    className="h-14 w-14 rounded-full border border-white/10 object-cover transition group-hover:border-cyan-400/60"
-                  />
-
-                  <div>
-                    <div className="font-semibold text-white">{item.name}</div>
-                    <div className="text-sm text-white/50">{item.role}</div>
-                  </div>
-                </div>
-
-                <p className="text-lg leading-8 text-white/75">“{item.text}”</p>
-              </motion.div>
-            ))}
-          </motion.div>
+          <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            Trusted by founders who care about speed and polish.
+          </h2>
         </div>
-      </section>
-    </SectionReveal>
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          {testimonials.map((item) => (
+            <article
+              key={item.name}
+              data-reveal
+              className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.035] p-7 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-300/25"
+            >
+              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full border border-white/10 transition duration-500 group-hover:scale-125" />
+              <Quote className="absolute bottom-5 right-5 h-16 w-16 text-white/[0.04]" />
+
+              <div className="relative mb-7 flex items-center gap-4">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 rounded-2xl border border-white/10 object-cover transition group-hover:border-cyan-400/60"
+                />
+
+                <div>
+                  <div className="font-semibold text-white">{item.name}</div>
+                  <div className="text-sm text-white/50">{item.role}</div>
+                </div>
+              </div>
+
+              <p className="relative text-lg leading-8 text-white/75">
+                &ldquo;{item.text}&rdquo;
+              </p>
+              <div className="relative mt-7 h-px w-20 bg-gradient-to-r from-cyan-200/70 to-violet-300/20" />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
