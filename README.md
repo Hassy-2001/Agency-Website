@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GeekVentures
 
-## Getting Started
+A simplified futuristic agency portfolio with a cyan/violet palette, glass panels, and a Three.js hero, built with Next.js 16, React 19, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. To verify a production build, run `npm run build`; serve it with `npm start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Edit the portfolio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/data/site.ts`: company details, services, project links, and social links.
+- `src/components/`: navigation, hero, work grid, services, process, contact, and footer.
+- `src/app/globals.css`: design tokens, layout, responsive styling, and reduced-motion rules.
+- `src/app/layout.tsx`: page metadata and font.
+- `public/images/projects/`: local screenshots of portfolio websites.
 
-## Learn More
+The work gallery includes Escentury and the five existing projects. Umrah & Beyond uses a typographic cover because its domain could not be reached when collecting previews. Set its `image` field to a local image path when a screenshot is available. Other previews fall back to a cover if an image fails to load.
 
-To learn more about Next.js, take a look at the following resources:
+Contact links open email, WhatsApp, or the phone dialer. Optional build-time overrides are `NEXT_PUBLIC_COMPANY_EMAIL`, `NEXT_PUBLIC_COMPANY_PHONE`, and `NEXT_PUBLIC_COMPANY_WHATSAPP`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The existing `/api/contact` email endpoint is retained but is not used by the contact links. It requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` if connected to a future form.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Checks
 
-## Deploy on Vercel
+```bash
+npx tsc --noEmit
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desktop and mobile review screenshots are saved in `artifacts/`.

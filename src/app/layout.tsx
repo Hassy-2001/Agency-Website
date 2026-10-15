@@ -10,19 +10,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.geekventures.com'),
   title: {
-    default: 'GeekVentures | AI & Software Agency',
+    default: 'GeekVentures | Creative & Digital Agency',
     template: '%s | GeekVentures'
   },
   description:
-    'GeekVentures builds AI-powered business solutions, modern software products, and seamless digital experiences for ambitious companies.',
+    'Video editing, social media marketing, websites, and AI-powered apps. GeekVentures turns good ideas into great digital experiences.',
   applicationName: 'GeekVentures',
   keywords: [
-    'AI automation agency',
-    'custom software agency',
+    'video editing agency',
+    'social media marketing',
     'web development agency',
     'digital agency',
-    'business automation',
-    'SaaS development'
+    'AI applications',
+    'custom chatbots',
+    'app development'
   ],
   authors: [{ name: 'GeekVentures' }],
   creator: 'GeekVentures',
@@ -50,9 +51,9 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'GeekVentures | AI & Software Agency',
+    title: 'GeekVentures | Creative & Digital Agency',
     description:
-      'AI systems, modern software, and premium digital experiences for forward-looking businesses.',
+      'Video, social, websites, and AI-powered apps. Good ideas. Great impact.',
     url: 'https://www.geekventures.com',
     siteName: 'GeekVentures',
     images: ['/images/banner.png'],
@@ -60,15 +61,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GeekVentures | AI & Software Agency',
+    title: 'GeekVentures | Creative & Digital Agency',
     description:
-      'AI systems, modern software, and premium digital experiences for forward-looking businesses.',
+      'Video, social, websites, and AI-powered apps. Good ideas. Great impact.',
     images: ['/images/banner.png']
   }
 };
 
 export const viewport: Viewport = {
-  themeColor: '#030712',
+  themeColor: '#05070d',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1

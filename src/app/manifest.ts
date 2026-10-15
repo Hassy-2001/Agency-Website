@@ -5,11 +5,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "GeekVentures",
     short_name: "GeekVentures",
     description:
-      "AI automation, custom software, modern websites, and digital growth systems.",
+      "Video editing, social media marketing, web development, and AI-powered apps.",
     start_url: "/",
     display: "standalone",
-    background_color: "#030712",
-    theme_color: "#030712",
+    background_color: "#05070d",
+    theme_color: "#05070d",
     icons: [
       {
         src: "/favicon.png",

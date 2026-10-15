@@ -3,25 +3,26 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function ThreeAgencyScene() {
+export default function ThreeAgencyScene({ onReady }: { onReady?: (ready: boolean) => void }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: false,
-      powerPreference: "low-power",
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
+    } catch {
+      // Retain the CSS artwork when WebGL is unavailable.
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 0, 8);
+    camera.position.set(0, 0, 9.5);
 
     const group = new THREE.Group();
     scene.add(group);
@@ -89,8 +90,10 @@ export default function ThreeAgencyScene() {
 
     const mouse = new THREE.Vector2(0, 0);
     const onMouseMove = (event: MouseEvent) => {
-      mouse.x = (event.clientX / window.innerWidth - 0.5) * 2;
-      mouse.y = (event.clientY / window.innerHeight - 0.5) * 2;
+      if (motionPreference.matches) return;
+      const bounds = canvas.getBoundingClientRect();
+      mouse.x = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1));
+      mouse.y = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1));
     };
 
     window.addEventListener("mousemove", onMouseMove);
@@ -103,13 +106,15 @@ export default function ThreeAgencyScene() {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      renderer.render(scene, camera);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
     let frameId = 0;
-    let isVisible = true;
+    let isVisible = document.visibilityState === "visible";
+    let isInView = true;
     const startedAt = performance.now();
     const onVisibilityChange = () => {
       isVisible = document.visibilityState === "visible";
@@ -121,12 +126,12 @@ export default function ThreeAgencyScene() {
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     const animate = () => {
-      if (!isVisible) {
+      if (!isVisible || !isInView) {
         frameId = 0;
         return;
       }
 
-      const elapsed = (performance.now() - startedAt) / 1000;
+      const elapsed = motionPreference.matches ? 0 : (performance.now() - startedAt) / 1000;
 
       group.rotation.y = elapsed * 0.18 + mouse.x * 0.18;
       group.rotation.x = Math.sin(elapsed * 0.45) * 0.16 - mouse.y * 0.12;
@@ -135,22 +140,40 @@ export default function ThreeAgencyScene() {
       particles.rotation.y = elapsed * 0.04;
 
       renderer.render(scene, camera);
-      frameId = window.requestAnimationFrame(animate);
+      frameId = motionPreference.matches ? 0 : window.requestAnimationFrame(animate);
     };
 
+    const onMotionChange = () => {
+      window.cancelAnimationFrame(frameId);
+      frameId = 0;
+      mouse.set(0, 0);
+      animate();
+    };
+    motionPreference.addEventListener("change", onMotionChange);
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView && frameId === 0) animate();
+    });
+    observer.observe(canvas);
     animate();
+    onReady?.(true);
 
     return () => {
       window.cancelAnimationFrame(frameId);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      motionPreference.removeEventListener("change", onMotionChange);
+      observer.disconnect();
       particlesGeometry.dispose();
       core.geometry.dispose();
       wire.geometry.dispose();
+      core.material.dispose();
+      wire.material.dispose();
+      particles.material.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [onReady]);
 
   return (
     <canvas
