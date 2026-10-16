@@ -5,6 +5,13 @@ export const company = {
   whatsapp: process.env.NEXT_PUBLIC_COMPANY_WHATSAPP || "+92-312-2416272",
 };
 
+export const clients = [
+  { name: "ÈSCENTURY", logo: "/images/clients/escentury.jpeg", href: "https://www.escentury.com/", appearance: "dark" },
+  { name: "A.Modern day cricket academy", logo: "/images/clients/modern-day-cricket.png", href: null, appearance: "dark" },
+  { name: "FMC", logo: "/images/clients/fmc.jpeg", href: null, appearance: "dark" },
+  { name: "Umrah & Beyonds", logo: "/images/clients/umrah-and-beyonds.jpeg", href: null, appearance: "light" },
+];
+
 export const services = [
   { title: "Video editing", description: "Scroll-stopping reels. Stories worth watching.", tags: "Reels / Brand films / Post-production", icon: "video" },
   { title: "Social media marketing", description: "Build your presence. Find your people.", tags: "Content / Strategy / Campaigns", icon: "social" },

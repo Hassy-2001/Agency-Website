@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import Clients from "@/components/Clients";
 import Services from "@/components/Services";
 import { Process } from "@/components/Process";
 import Projects from "@/components/Projects";
@@ -14,5 +15,5 @@ export default function HomePage() {
     email: company.email, telephone: company.phone, sameAs: socials.map(social => social.href),
     areaServed: "Worldwide", serviceType: services.map(service => service.title),
   };
-  return <><a className="skip-link" href="#main">Skip to content</a><Navbar /><main id="main"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /><HeroSection /><Projects /><Services /><Process /><Contact /></main><Footer /></>;
+  return <><a className="skip-link" href="#main">Skip to content</a><Navbar /><main id="main"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /><HeroSection /><Clients /><Projects /><Services /><Process /><Contact /></main><Footer /></>;
 }

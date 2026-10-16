@@ -63,6 +63,19 @@ h1 { font-size: clamp(58px, 6.7vw, 98px); letter-spacing: -.065em; line-height: 
 .art-star { position: absolute; top: 12%; right: 8%; color: var(--accent); animation: slow-spin 30s linear infinite; }
 .hero-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); margin-top: 25px; padding-block: 0 28px; color: var(--muted); font-size: 10px; letter-spacing: .04em; }
 .hero-bottom a { display: flex; align-items: center; gap: 13px; }
+.clients-section { padding-top: 52px; }
+.clients-heading { justify-content: center; color: var(--accent); margin-bottom: 24px; }
+.clients-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.client-card { position: relative; min-width: 0; padding: 12px; border: 1px solid #a8caff24; border-radius: 20px; background: linear-gradient(135deg, #8cf0ff08, #a78bfa0b); box-shadow: inset 0 1px 0 #ffffff08; text-align: center; }
+.client-card::before { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 1px; background: linear-gradient(90deg, transparent, #8cf0ff70, #a78bfa70, transparent); }
+.client-identity { display: flex; height: 100%; flex-direction: column; border-radius: 12px; }
+.client-logo { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 12px; }
+.client-logo-dark { background: #000; }
+.client-logo-light { background: #fcfaf4; }
+.client-logo-image { object-fit: contain; padding: 12px; }
+.client-name { display: flex; flex: 1; align-items: center; justify-content: center; gap: 7px; padding: 16px 4px 5px; color: #dae4f7; font-size: clamp(12px, 1.1vw, 15px); font-weight: 500; line-height: 1.5; text-wrap: balance; }
+.client-name svg { flex-shrink: 0; color: var(--accent); }
+a.client-identity:hover .client-name { color: var(--accent); }
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 44px; }
 .section-heading .eyebrow { color: var(--accent); margin-bottom: 23px; }
 .small-note { font-size: 11px; color: #aab2ac; line-height: 1.6; max-width: 150px; }
@@ -156,6 +169,11 @@ h1 { font-size: clamp(58px, 6.7vw, 98px); letter-spacing: -.065em; line-height: 
   .section-space { padding-block: 80px; }
 }
 @media (max-width: 700px) {
+  .clients-section { padding-top: 36px; }
+  .clients-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .client-card { padding: 8px; border-radius: 16px; }
+  .client-logo { aspect-ratio: 1; border-radius: 10px; }
+  .client-logo-image { padding: 8px; }
   .shell { width: calc(100% - 40px); }
   .nav-inner { height: 72px; gap: 12px; }
   .brand { font-size: 19px; gap: 7px; }

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-const links = [{ label: "Work", href: "#projects" }, { label: "Services", href: "#services" }, { label: "About", href: "#about" }];
+const links = [{ label: "Work", href: "#projects" }, { label: "Clients", href: "#clients" }, { label: "Services", href: "#services" }, { label: "About", href: "#about" }];
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
